@@ -101,6 +101,13 @@ const ProductView: FC<Props> = ({ product }) => {
               ))}
             </ProductSlider>
           </div>
+          {process.env.COMMERCE_WISHLIST_ENABLED && (
+            <WishlistButton
+              className={s.wishlistButton}
+              productId={product.id}
+              variant={product.variants[0]! as any}
+            />
+          )}
         </div>
         <div className={s.sidebar}>
           <section>
@@ -138,6 +145,8 @@ const ProductView: FC<Props> = ({ product }) => {
             <div className="pb-14 break-words w-full max-w-xl">
               <Text html={product.descriptionHtml || product.description} />
             </div>
+
+            <div className="py-4">Stars and reviews.</div>
           </section>
           <div>
             <Button
@@ -150,14 +159,15 @@ const ProductView: FC<Props> = ({ product }) => {
               Add to Cart
             </Button>
           </div>
+
+          <div className="mt-2">
+            <ul>
+              <li className="border-b border-accents-2 py-4 px-2 flex flex-row">
+                Details
+              </li>
+            </ul>
+          </div>
         </div>
-        {process.env.COMMERCE_WISHLIST_ENABLED && (
-          <WishlistButton
-            className={s.wishlistButton}
-            productId={product.id}
-            variant={product.variants[0]! as any}
-          />
-        )}
       </div>
     </Container>
   )
